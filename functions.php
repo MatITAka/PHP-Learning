@@ -46,9 +46,9 @@ function displayMembers() {
                 echo "<div class='d-flex justify-content-center'>";
                 echo "<form action='data/data.php' method='post' class='mr-2'>";
                 echo "<input type='hidden' name='delete_index' value='$i'>";
-                echo "<button type='submit' class='btn btn-danger'>Supprimer</button>";
+                echo "<button type='submit' class='btn btn-danger btn-sm'>Supprimer</button>";
                 echo "</form>";
-                echo "<a href='src/edit.php?id=$i' class='btn btn-primary'>Modifier</a>";
+                echo "<a href='src/edit.php?id=$i' class='btn btn-primary btn-sm'>Modifier</a>";
                 echo "</div>";
             }
             echo "</td>";

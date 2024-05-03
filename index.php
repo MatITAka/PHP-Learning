@@ -17,20 +17,22 @@ require 'functions.php';
         ?>
 
 
-        <table class="table table-striped mt-5">
-            <thead>
-            <tr>
-                <th>Prénom</th>
-                <th>Age</th>
-                <th>Ville</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-               displayMembers();
-            ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped mt-5">
+                <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Age</th>
+                    <th>Ville</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                displayMembers();
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 <?php require 'footer.php' ?>

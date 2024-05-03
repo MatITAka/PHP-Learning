@@ -1,29 +1,46 @@
 <?php require_once '../header.php' ?>
 
-    <div class="container mt-5 p-3">
-        <div id="about">
-            <h1 class="text-center">À propos de nous</h1>
-            <p class="lead text-center">Nous sommes une entreprise dédiée à fournir les meilleurs services à nos clients. Notre équipe est composée de professionnels expérimentés dans divers domaines, prêts à répondre à vos besoins.</p>
-            <h2>Notre mission</h2>
-            <p>Notre mission est de fournir des services de haute qualité qui répondent aux besoins de nos clients et dépassent leurs attentes.</p>
-            <h2>Notre vision</h2>
-            <p>Nous aspirons à être reconnus comme une entreprise leader dans notre secteur, connue pour la qualité de ses services et son engagement envers la satisfaction du client.</p>
-            <h2>Nos valeurs</h2>
-            <div class="row m-2">
-                <div class="col-lg-6 col-sm-12">
-                    <ul class="list-group">
-                        <li class="list-group-item">Intégrité</li>
-                        <li class="list-group-item">Engagement</li>
-                    </ul>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <ul class="list-group">
-                        <li class="list-group-item">Excellence</li>
-                        <li class="list-group-item">Innovation</li>
-                    </ul>
+    <div class="container mt-5 p-5">
+
+        <section class="text-center py-5 bg-light animate__animated animate__fadeInDown mb-5">
+            <h1 class="fs-3 fs-md-2 fs-lg-1">À propos de nous</h1>
+            <p class="lead fs-6 fs-md-5 fs-lg-4">Nous sommes une entreprise dédiée à fournir les meilleurs services à nos clients.</p>
+        </section>
+
+
+        <section class="row animate__animated animate__fadeInUp mb-5">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Notre mission</h5>
+                        <p class="card-text">Notre mission est de fournir des services de haute qualité qui répondent aux besoins de nos clients et dépassent leurs attentes.</p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Notre vision</h5>
+                        <p class="card-text">Nous aspirons à être reconnus comme une entreprise leader dans notre secteur, connue pour la qualité de ses services et son engagement envers la satisfaction du client.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Nos valeurs</h5>
+                        <p class="card-text">Intégrité, Engagement, Excellence, Innovation</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="text-center py-5 animate__animated animate__fadeInUp">
+            <h2 class="fs-5 fs-md-4 fs-lg-3">Rejoignez-nous</h2>
+            <p class="fs-6 fs-md-5 fs-lg-4">Prêt à faire partie de notre équipe ?</p>
+            <a href="contact.php" class="btn btn-primary">Rejoignez-nous</a>
+        </section>
     </div>
 
 <?php require_once '../footer.php' ?>
