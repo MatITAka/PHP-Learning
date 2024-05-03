@@ -3,8 +3,26 @@ function getImages() {
     try {
         $dbPath = __DIR__ . '/data/data2.db';
         $db = new PDO('sqlite:' . $dbPath);
-        $stmt = $db->query('SELECT * FROM images');
-        return $stmt->fetchAll();
+
+        // Get all images
+        $images = $db->query("SELECT * FROM images")->fetchAll(PDO::FETCH_ASSOC);
+
+        // For each image, get the likes and comments
+        foreach ($images as $key => $image) {
+            $image_id = $image['id'];
+
+            // Get likes
+            $likes = $db->prepare("SELECT COUNT(*) as count FROM likes WHERE image_id = ?");
+            $likes->execute([$image_id]);
+            $images[$key]['likes'] = $likes->fetch(PDO::FETCH_ASSOC)['count'];
+
+            // Get comments
+            $comments = $db->prepare("SELECT * FROM comments WHERE image_id = ?");
+            $comments->execute([$image_id]);
+            $images[$key]['comments'] = $comments->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $images;
     } catch (PDOException $e) {
         echo "PDO Exception: " . $e->getMessage();
     } catch (Exception $e) {

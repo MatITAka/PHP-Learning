@@ -18,9 +18,9 @@ session_start();
     <div class="text-center">
         <?php if (isset($_SESSION['user'])): ?>
 
-        <button type="button" class="btn btn-primary mb-5 mt-4" data-toggle="modal" data-target="#uploadModal">
-            Ajouter une image
-        </button>
+            <button type="button" class="btn btn-primary mb-5 mt-4" data-toggle="modal" data-target="#uploadModal">
+                Ajouter une image
+            </button>
         <?php endif; ?>
     </div>
 
@@ -30,7 +30,15 @@ session_start();
         $images = getImages();
         foreach ($images as $image) {
             echo '<div class="col-4 mb-2">';
-            echo '<img src="data:image/jpeg;base64,' . base64_encode($image['content']) . '" class="img-thumbnail">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($image['content']) . '" class="img-thumbnail hover-zoom">';
+            echo '<p>' . $image['likes'] . ' likes</p>';
+            foreach ($image['comments'] as $comment) {
+                echo '<p>' . $comment['comment'] . '</p>';
+            }
+            echo "<form action='like.php' method='post'>";
+            echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
+            echo "<button type='submit' class='btn btn-link like-button'><i class='far fa-heart'></i></button>";
+            echo "</form>";
             if (isset($_SESSION['user'])) {
                 echo "<form action='delete.php' method='post'>";
                 echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
