@@ -32,9 +32,19 @@ session_start();
             echo '<div class="col-4 mb-2">';
             echo '<img src="data:image/jpeg;base64,' . base64_encode($image['content']) . '" class="img-thumbnail hover-zoom">';
             echo '<p>' . $image['likes'] . ' likes</p>';
-            foreach ($image['comments'] as $comment) {
+            $comments = getComments($image['id']); // Get comments for the image
+            foreach ($comments as $comment) {
                 echo '<p>' . $comment['comment'] . '</p>';
+                echo "<form action='delete_comment.php' method='post'>";
+                echo "<input type='hidden' name='comment_id' value='" . $comment['id'] . "'>";
+                echo "<button type='submit' class='btn btn-danger'>Delete Comment</button>";
+                echo "</form>";
             }
+            echo "<form action='comment.php' method='post'>";
+            echo "<input type='hidden' name='image_id' value='" . $image['id'] . "'>";
+            echo "<textarea name='comment'></textarea>";
+            echo "<button type='submit' class='btn btn-primary'>Add Comment</button>";
+            echo "</form>";
             echo "<form action='like.php' method='post'>";
             echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
             echo "<button type='submit' class='btn btn-link like-button'><i class='far fa-heart'></i></button>";

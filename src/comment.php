@@ -1,24 +1,12 @@
-
 <?php
+require_once '../functions.php';
 session_start();
-require 'data/data2.db';
 
-try {
-    // Connect to the SQLite database
-    $pdo = new PDO('sqlite:data/data2.db');
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+if (isset($_POST['image_id']) && isset($_POST['comment']) && isset($_SESSION['id'])) {
+    $session_id = $_SESSION['id'];
+    $image_id = $_POST['image_id'];
+    $comment = $_POST['comment'];
+    addComment($session_id, $image_id, $comment);
 }
 
-$session_id = session_id(); // Get the session ID
-$image_id = $_POST['image_id']; // Get the image ID from the POST data
-$comment = $_POST['comment']; // Get the comment from the POST data
-
-// Insert a new comment into the database
-$query = $pdo->prepare("INSERT INTO comments (session_id, image_id, comment) VALUES (?, ?, ?)");
-$query->execute([$session_id, $image_id, $comment]);
-
-// Return a response
-echo "success";
-
-?>
+header('Location: galerie.php');

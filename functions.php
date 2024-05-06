@@ -106,5 +106,48 @@ function updateMember($id, $newName, $newAge, $newCity) {
     }
 }
 
+function getComments($image_id) {
+    try {
+        $dbPath = __DIR__ . '/data/data2.db';
+        $db = new PDO('sqlite:' . $dbPath);
+
+        $stmt = $db->prepare("SELECT * FROM comments WHERE image_id = ?");
+        $stmt->execute([$image_id]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "PDO Exception: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "Exception: " . $e->getMessage();
+    }
+}
+
+function deleteComment($session_id, $comment_id) {
+    try {
+        $dbPath = __DIR__ . '/data/data2.db';
+        $db = new PDO('sqlite:' . $dbPath);
+
+        $stmt = $db->prepare("DELETE FROM comments WHERE id = ? AND session_id = ?");
+        $stmt->execute([$comment_id, $session_id]);
+    } catch (PDOException $e) {
+        echo "PDO Exception: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "Exception: " . $e->getMessage();
+    }
+}
+
+function addComment($session_id, $image_id, $comment) {
+    try {
+        $dbPath = __DIR__ . '/data/data2.db';
+        $db = new PDO('sqlite:' . $dbPath);
+
+        $stmt = $db->prepare("INSERT INTO comments (session_id, image_id, comment) VALUES (?, ?, ?)");
+        $stmt->execute([$session_id, $image_id, $comment]);
+    } catch (PDOException $e) {
+        echo "PDO Exception: " . $e->getMessage();
+    } catch (Exception $e) {
+        echo "Exception: " . $e->getMessage();
+    }
+}
 
 ?>
