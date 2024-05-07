@@ -1,12 +1,23 @@
 <?php
-require_once '../functions.php';
+
 session_start();
 
-if (isset($_POST['image_id']) && isset($_POST['comment']) && isset($_SESSION['id'])) {
-    $session_id = $_SESSION['id'];
-    $image_id = $_POST['image_id'];
+try {
+    $dbPath = __DIR__ . '/../data/data2.db';
+    $pdo = new PDO('sqlite:' . $dbPath);
+
+    $session_id = session_id();
+    $image_id = $_POST['id'];
     $comment = $_POST['comment'];
-    addComment($session_id, $image_id, $comment);
+
+
+    $query = $pdo->prepare("INSERT INTO comments (session_id, image_id, comment) VALUES (?, ?, ?)");
+    $query->execute([$session_id, $image_id, $comment]);
+} catch (PDOException $e) {
+    $_SESSION['error'] = "Error: " . $e->getMessage();
 }
 
 header('Location: galerie.php');
+exit;
+
+?>

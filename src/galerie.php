@@ -28,33 +28,40 @@ session_start();
     <div class="row">
         <?php
         $images = getImages();
+
         foreach ($images as $image) {
             echo '<div class="col-4 mb-2">';
             echo '<img src="data:image/jpeg;base64,' . base64_encode($image['content']) . '" class="img-thumbnail hover-zoom">';
             echo '<p>' . $image['likes'] . ' likes</p>';
-            $comments = getComments($image['id']); // Get comments for the image
+
+            $comments = getComments($image['id']);
             foreach ($comments as $comment) {
                 echo '<p>' . $comment['comment'] . '</p>';
-                echo "<form action='delete_comment.php' method='post'>";
-                echo "<input type='hidden' name='comment_id' value='" . $comment['id'] . "'>";
-                echo "<button type='submit' class='btn btn-danger'>Delete Comment</button>";
-                echo "</form>";
+                if (isset($_SESSION['user'])) {
+                    echo "<form action='delete_comment.php' method='post' class='form-inline'>";
+                    echo "<input type='hidden' name='comment_id' value='" . $comment['id'] . "'>";
+                    echo "<button type='submit' class='btn btn-danger btn-sm'>Delete Comment</button>";
+                    echo "</form>";
+                }
             }
-            echo "<form action='comment.php' method='post'>";
-            echo "<input type='hidden' name='image_id' value='" . $image['id'] . "'>";
-            echo "<textarea name='comment'></textarea>";
-            echo "<button type='submit' class='btn btn-primary'>Add Comment</button>";
+            echo "<form action='comment.php' method='post' class='form-inline'>";
+            echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
+            echo "<textarea name='comment' class='form-control mr-2'></textarea>";
+            echo "<button type='submit' class='btn btn-primary btn-sm'>Add Comment</button>";
             echo "</form>";
-            echo "<form action='like.php' method='post'>";
+
+            echo "<form action='like.php' method='post' class='form-inline'>";
             echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
             echo "<button type='submit' class='btn btn-link like-button'><i class='far fa-heart'></i></button>";
             echo "</form>";
+
             if (isset($_SESSION['user'])) {
-                echo "<form action='delete.php' method='post'>";
+                echo "<form action='delete.php' method='post' class='form-inline'>";
                 echo "<input type='hidden' name='id' value='" . $image['id'] . "'>";
-                echo "<button type='submit' class='btn btn-danger'>Supprimer</button>";
+                echo "<button type='submit' class='btn btn-danger btn-sm'>Supprimer</button>";
                 echo "</form>";
             }
+
             echo '</div>';
         }
         ?>
